@@ -92,7 +92,7 @@ class Amazon_S3_and_CloudFront_Tweaks {
 		/*
 		 * Storage related filters.
 		 */
-		//add_filter( 'as3cf_allowed_mime_types', array( $this, 'allowed_mime_types' ), 10, 1 );
+		add_filter( 'as3cf_allowed_mime_types', array( $this, 'allowed_mime_types' ), 10, 1 );
 		//add_filter( 'as3cf_pre_update_attachment_metadata', array( $this, 'pre_update_attachment_metadata' ), 10, 4 );
 		//add_filter( 'as3cf_pre_upload_attachment', array( $this, 'pre_upload_attachment' ), 10, 3 );
 		//add_filter( 'as3cf_legacy_ms_subsite_prefix', array( $this, 'legacy_ms_subsite_prefix' ), 10, 2 );
@@ -476,11 +476,7 @@ class Amazon_S3_and_CloudFront_Tweaks {
 	 * @return array
 	 */
 	function allowed_mime_types( $types ) {
-		// Disallow offload of PDFs.
-		unset( $types['pdf'] );
-
-		// Allow offload of PDFs.
-		$types['pdf'] = 'application/pdf';
+		$types['pdf'] = 'image/svg+xml';
 
 		return $types;
 	}
